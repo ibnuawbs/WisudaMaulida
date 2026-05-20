@@ -1,0 +1,246 @@
+<!DOCTYPE html><html class="dark" lang="id"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>NEO-TOKYO 16 | SCANNING</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed-variant": "#5700c9",
+                    "on-primary-container": "#560051",
+                    "surface-container-low": "#211536",
+                    "on-error": "#690005",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-lowest": "#140727",
+                    "on-secondary-fixed-variant": "#004f54",
+                    "on-primary-fixed-variant": "#83007c",
+                    "on-surface-variant": "#dcbed2",
+                    "on-tertiary-container": "#380087",
+                    "secondary-container": "#00eefc",
+                    "secondary-fixed-dim": "#00dbe9",
+                    "on-tertiary-fixed": "#23005b",
+                    "tertiary-fixed-dim": "#d1bcff",
+                    "error-container": "#93000a",
+                    "surface-container-highest": "#3c2e50",
+                    "tertiary-fixed": "#e9ddff",
+                    "inverse-surface": "#ecdcff",
+                    "surface-dim": "#190c2d",
+                    "on-secondary-fixed": "#002022",
+                    "surface": "#190c2d",
+                    "outline-variant": "#564050",
+                    "on-secondary": "#00363a",
+                    "error": "#ffb4ab",
+                    "surface-tint": "#ffabee",
+                    "surface-container-high": "#302445",
+                    "inverse-on-surface": "#372a4c",
+                    "on-background": "#ecdcff",
+                    "on-secondary-container": "#00686f",
+                    "on-primary": "#5c0057",
+                    "tertiary-container": "#a37cff",
+                    "tertiary": "#d1bcff",
+                    "primary-container": "#ff2ef1",
+                    "primary": "#ffabee",
+                    "surface-container": "#26193a",
+                    "background": "#190c2d",
+                    "on-tertiary": "#3c0090",
+                    "surface-bright": "#403355",
+                    "secondary-fixed": "#7df4ff",
+                    "outline": "#a4899b",
+                    "inverse-primary": "#ab00a2",
+                    "surface-variant": "#3c2e50",
+                    "on-surface": "#ecdcff",
+                    "primary-fixed-dim": "#ffabee",
+                    "primary-fixed": "#ffd7f3",
+                    "secondary": "#d3fbff",
+                    "on-primary-fixed": "#390035"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "margin": "24px",
+                    "unit": "8px",
+                    "container-max": "1200px"
+            },
+            "fontFamily": {
+                    "headline-sm": ["Space Mono"],
+                    "headline-lg-mobile": ["Space Mono"],
+                    "body-md": ["JetBrains Mono"],
+                    "headline-md": ["Space Mono"],
+                    "label-lg": ["Space Mono"],
+                    "headline-lg": ["Space Mono"],
+                    "body-lg": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "headline-sm": ["24px", {"lineHeight": "32px", "letterSpacing": "1px", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["32px", {"lineHeight": "40px", "letterSpacing": "0px", "fontWeight": "700"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-1px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .scanline-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.05), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.05));
+            background-size: 100% 4px, 3px 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .rpg-dialog {
+            border: 4px solid #140727;
+            position: relative;
+            box-shadow: 6px 6px 0px 0px #3c2e50;
+        }
+
+        .rpg-dialog::after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            right: 4px;
+            bottom: 4px;
+            border: 1px solid #140727;
+            pointer-events: none;
+        }
+
+        .corner-accent {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #140727;
+            z-index: 10;
+        }
+
+        /* Loading Bar Animation */
+        .loading-bar-fill {
+            width: 0%;
+            height: 100%;
+            background-color: #140727;
+            animation: fillProgress 7s linear forwards;
+        }
+
+        @keyframes fillProgress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        /* Sequential Text Reveal */
+        .status-text-item {
+            opacity: 0;
+            transform: translateY(4px);
+        }
+
+        .reveal-item-1 { animation: revealText 0.5s ease forwards 1s; }
+        .reveal-item-2 { animation: revealText 0.5s ease forwards 3s; }
+        .reveal-item-3 { animation: revealText 0.5s ease forwards 5s; }
+
+        @keyframes revealText {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Button Appearance */
+        .reveal-btn {
+            opacity: 0;
+            pointer-events: none;
+            animation: revealButton 0.5s ease forwards 7.5s;
+        }
+
+        @keyframes revealButton {
+            to { opacity: 1; pointer-events: auto; }
+        }
+
+        /* Warning Blink */
+        .warning-blink {
+            animation: blinkRed 0.8s infinite steps(1);
+        }
+
+        @keyframes blinkRed {
+            0%, 100% { opacity: 1; color: #ff0000; }
+            50% { opacity: 0; }
+        }
+
+        .bg-pixel-city {
+            background-image: url('https://lh3.googleusercontent.com/aida/ADBb0ui76BX5l3Ykd6yMGSMr1syAKk984nUU1ujMxKoqWoBvRm6bemdjNvMRTdFxMRN77rMcmBYL45DXEumqSK_7t9eTWynpQjrk9yVmrVIo2_pPBnfWnffYtJtaPwdbNoftAuWsBQg6p6GxXHuGY2R96Zy4CZcopI1Fpxpbes3XnHJGZjGhyZ46av6N6gRkk9jOsSaegAudXfURrGSfmYsY9yMdusEkSZqMZDGbPHttY5LxdJHQWmeGKAZ4Hw');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .pixel-border {
+            border: 4px solid #140727;
+            background: #fff;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary selection:text-on-primary overflow-hidden">
+<div class="scanline-overlay"></div>
+<main class="relative h-screen w-full flex items-center justify-center p-gutter bg-pixel-city overflow-hidden">
+<div class="absolute inset-0 bg-black/40 backdrop-blur-[1px]"></div>
+<div class="rpg-dialog max-w-[500px] w-full bg-white p-8 flex flex-col gap-6 relative z-10" id="dialog-box">
+<div class="corner-accent -top-2 -left-2"></div>
+<div class="corner-accent -top-2 -right-2"></div>
+<div class="corner-accent -bottom-2 -left-2"></div>
+<div class="corner-accent -bottom-2 -right-2"></div>
+<div class="flex flex-col items-center gap-2">
+<h1 class="font-headline-sm text-headline-sm text-surface-container-lowest uppercase text-center tracking-widest">
+                    SEDANG MEMINDAI
+                </h1>
+</div>
+<div class="w-full h-8 border-4 border-surface-container-lowest p-1 bg-white">
+<div class="loading-bar-fill"></div>
+</div>
+<div class="flex flex-col gap-2 min-h-[80px]" id="status-container">
+<p class="font-body-md text-surface-container-lowest status-text-item reveal-item-1">
+                    > Memindai user...
+                </p>
+<p class="font-body-md text-surface-container-lowest status-text-item reveal-item-2">
+                    > Memindai tingkat ketahanan stress...
+                </p>
+<p class="font-body-md text-surface-container-lowest status-text-item reveal-item-3">
+                    > Memindai tingkat kebahagiaan...
+                </p>
+</div>
+<div class="reveal-btn flex flex-col items-center gap-4">
+<button id="result-btn" class="group relative w-full md:w-auto border-2 border-surface-container-lowest px-8 py-2 font-headline-sm text-headline-sm hover:text-white transition-all active:translate-y-1 flex items-center justify-center gap-4 bg-surface-container-highest hover:bg-surface-bright text-on-surface shadow-[4px_4px_0px_0px_#140727]">
+<span class="material-symbols-outlined transition-transform opacity-0 group-hover:opacity-100">play_arrow</span>
+                    LIHAT HASIL
+                    <span class="material-symbols-outlined transition-transform opacity-0 group-hover:opacity-100 rotate-180">play_arrow</span>
+</button>
+<p class="warning-blink font-headline-sm text-[16px] text-red-600 font-bold">
+                    WARNING: S.Pd Detected
+                </p>
+</div>
+</div>
+</main>
+
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.getElementById('result-btn');
+            if(btn) {
+                btn.addEventListener('click', () => {
+                    // Berpindah ke halaman page3.html saat tombol ditekan
+                    window.location.href = "page3.html";
+                });
+            }
+        });
+    </script>
+</body></html>
