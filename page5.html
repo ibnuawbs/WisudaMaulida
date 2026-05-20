@@ -94,4 +94,132 @@
       .crt-overlay {
         position: fixed;
         top: 0;
-        left: 0
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+        background-size: 100% 2px, 3px 100%;
+        pointer-events: none;
+        z-index: 50;
+      }
+
+      .dialog-box {
+        background-color: #ffffff;
+        border: 4px solid #000000;
+        position: relative;
+        box-shadow: 8px 8px 0px 0px rgba(0, 0, 0, 1);
+      }
+
+      .dialog-box::before {
+        content: '';
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        right: 4px;
+        bottom: 4px;
+        border: 2px solid #000000;
+        pointer-events: none;
+      }
+
+      .corner-accent {
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        background: #000000;
+      }
+
+      .btn-retro {
+        position: relative;
+        border: 2px solid #140727;
+        transition: all 0.1s steps(4);
+        box-shadow: 4px 4px 0px 0px #000;
+      }
+
+      .btn-retro:hover {
+        background-color: #403355;
+        transform: translate(2px, 2px);
+        box-shadow: 2px 2px 0px 0px #000;
+      }
+
+      .btn-retro:active {
+        transform: translate(4px, 4px);
+        box-shadow: 0px 0px 0px 0px #000;
+      }
+
+      #typing-container {
+        min-height: 160px;
+      }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary selection:text-on-primary h-screen overflow-hidden flex items-center justify-center font-body-md">
+<div class="crt-overlay"></div>
+<div class="fixed inset-0 z-0">
+<img alt="Maulida's Graduation Classroom" class="w-full h-full object-cover opacity-80 filter brightness-75 contrast-125 saturate-150 grayscale-[0.2]" src="https://lh3.googleusercontent.com/aida/ADBb0uhIpcAVQnrhQzihl-uqZthm3PUoLZa0TtNlqAo9nvq1RroZ1fnyTzRlHoYr-5_k7BHo62iO_6X0FksMAeCu7GuumkUBecKSdWvkw9hyHSTXJseTv3Qld7_MDDK1TM8kLxd8bOW4DYu5-myEz-nCrR0W1cX_rQFWa3SfzyNM1Hvv8-kykY-u_Lx2HIlDF0KAvAx0XKdO84dHCrOzNWVweIMvhERaBhusHwRnXBtri5s7ggvhiYsd37T51z0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
+</div>
+<div class="relative z-10 w-full max-w-2xl px-gutter flex items-center justify-center h-full">
+<div class="dialog-box p-margin md:p-10 flex flex-col items-center text-center w-full" id="dialog">
+<div class="corner-accent -top-2 -left-2"></div>
+<div class="corner-accent -top-2 -right-2"></div>
+<div class="corner-accent -bottom-2 -left-2"></div>
+<div class="corner-accent -bottom-2 -right-2"></div>
+<div class="w-full flex flex-col items-center justify-center" id="typing-container">
+<h1 class="font-headline-sm text-headline-sm text-surface-container-highest mb-gutter tracking-wider" id="greeting-title">Selamat wisuda, Maulida 🌸</h1>
+<p class="font-body-lg text-body-lg text-surface-container-highest leading-relaxed max-w-md font-bold" id="greeting-message">Semoga langkah berikutnya<br/>dipenuhi hal-hal baik,<br/>orang-orang baik,<br/>dan kebahagiaan yang pantas kamu dapatkan.</p>
+</div>
+<div class="mt-margin" id="action-area">
+<button id="secret-msg-btn" class="btn-retro bg-surface-container-highest px-gutter py-unit font-label-lg text-label-lg tracking-widest uppercase flex items-center gap-unit group text-on-surface">
+<span class="material-symbols-outlined text-secondary transition-transform group-hover:translate-x-1">mail</span>
+                    Buka Pesan Rahasia!
+                </button>
+</div>
+</div>
+</div>
+<div class="fixed inset-0 pointer-events-none z-5 overflow-hidden">
+<div id="particles"></div>
+</div>
+<script>
+        // Simple Pixel Particle Effect
+        function triggerConfetti() {
+            const container = document.getElementById('particles');
+            for(let i=0; i<30; i++) {
+                const p = document.createElement('div');
+                p.style.position = 'absolute';
+                p.style.width = '6px';
+                p.style.height = '6px';
+                p.style.backgroundColor = i % 2 === 0 ? '#ffabee' : '#00eefc';
+                p.style.left = Math.random() * 100 + 'vw';
+                p.style.top = '-20px';
+                p.style.zIndex = '5';
+                p.style.boxShadow = '2px 2px 0px black';
+                container.appendChild(p);
+
+                const duration = 2000 + Math.random() * 3000;
+                const anim = p.animate([
+                    { transform: `translate(0, 0) rotate(0deg)`, opacity: 1 },
+                    { transform: `translate(${(Math.random()-0.5)*200}px, 110vh) rotate(${Math.random()*360}deg)`, opacity: 0 }
+                ], {
+                    duration: duration,
+                    easing: 'cubic-bezier(.17,.67,.83,.67)'
+                });
+
+                anim.onfinish = () => p.remove();
+            }
+        }
+
+        // Trigger confetti on load
+        window.addEventListener('load', () => {
+            triggerConfetti();
+        });
+
+        // Menangani pengalihan halaman saat tombol rahasia diklik
+        document.addEventListener('DOMContentLoaded', () => {
+            const secretBtn = document.getElementById('secret-msg-btn');
+            if (secretBtn) {
+                secretBtn.addEventListener('click', () => {
+                    window.location.href = "page6.html";
+                });
+            }
+        });
+    </script>
+</body></html>
