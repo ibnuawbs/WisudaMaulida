@@ -1,0 +1,252 @@
+<!DOCTYPE html><html class="dark" lang="id"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>NEO-TOKYO 16 - GRADUATION RESULT</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#7df4ff",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-container": "#a37cff",
+                        "on-secondary-fixed-variant": "#004f54",
+                        "surface-container": "#26193a",
+                        "tertiary-fixed-dim": "#d1bcff",
+                        "on-tertiary-fixed-variant": "#5700c9",
+                        "surface-container-low": "#211536",
+                        "secondary": "#d3fbff",
+                        "inverse-on-surface": "#372a4c",
+                        "on-error": "#690005",
+                        "surface-bright": "#403355",
+                        "primary-fixed": "#ffd7f3",
+                        "on-primary": "#5c0057",
+                        "on-secondary": "#00363a",
+                        "inverse-surface": "#ecdcff",
+                        "secondary-fixed-dim": "#00dbe9",
+                        "on-surface": "#ecdcff",
+                        "inverse-primary": "#ab00a2",
+                        "outline-variant": "#564050",
+                        "on-primary-fixed-variant": "#83007c",
+                        "surface-dim": "#190c2d",
+                        "on-tertiary-container": "#380087",
+                        "on-secondary-container": "#00686f",
+                        "tertiary-fixed": "#e9ddff",
+                        "on-primary-container": "#560051",
+                        "tertiary": "#d1bcff",
+                        "surface-tint": "#ffabee",
+                        "surface-container-highest": "#3c2e50",
+                        "secondary-container": "#00eefc",
+                        "on-surface-variant": "#dcbed2",
+                        "surface-container-high": "#302445",
+                        "primary": "#ffabee",
+                        "surface": "#190c2d",
+                        "on-tertiary-fixed": "#23005b",
+                        "error": "#ffb4ab",
+                        "surface-variant": "#3c2e50",
+                        "outline": "#a4899b",
+                        "on-background": "#ecdcff",
+                        "on-primary-fixed": "#390035",
+                        "surface-container-lowest": "#140727",
+                        "primary-fixed-dim": "#ffabee",
+                        "on-secondary-fixed": "#002022",
+                        "error-container": "#93000a",
+                        "primary-container": "#ff2ef1",
+                        "on-tertiary": "#3c0090",
+                        "background": "#190c2d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "container-max": "1200px",
+                        "unit": "8px",
+                        "margin": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Space Mono"],
+                        "headline-lg-mobile": ["Space Mono"],
+                        "body-lg": ["JetBrains Mono"],
+                        "body-md": ["JetBrains Mono"],
+                        "label-lg": ["Space Mono"],
+                        "headline-sm": ["Space Mono"],
+                        "headline-lg": ["Space Mono"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["32px", { "lineHeight": "40px", "letterSpacing": "0px", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "700" }],
+                        "headline-sm": ["24px", { "lineHeight": "32px", "letterSpacing": "1px", "fontWeight": "700" }],
+                        "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-1px", "fontWeight": "700" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .crt-scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 4px, 3px 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+        
+        .rpg-dialog {
+            background-color: #ffffff;
+            border: 4px solid #000000;
+            position: relative;
+            box-shadow: 8px 8px 0px 0px rgba(0, 0, 0, 1);
+        }
+        
+        .rpg-dialog::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            right: 4px;
+            bottom: 4px;
+            border: 2px solid #000000;
+            pointer-events: none;
+        }
+
+        .corner-accent {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #000000;
+        }
+
+        .corner-tl { top: -8px; left: -8px; }
+        .corner-tr { top: -8px; right: -8px; }
+        .corner-bl { bottom: -8px; left: -8px; }
+        .corner-br { bottom: -8px; right: -8px; }
+
+        .cursor-blink {
+            display: inline-block;
+            width: 12px;
+            height: 18px;
+            background-color: #000000;
+            animation: blink 0.8s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .pixel-bar-segment {
+            height: 8px;
+            width: 8px;
+            margin-right: 2px;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen flex items-center justify-center relative overflow-hidden w-full h-screen">
+<div class="crt-scanlines"></div>
+<div class="fixed inset-0 z-0">
+<img alt="Pixel art cityscape" class="w-full h-full object-cover opacity-80 scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxQir2mtU1AcOt2_8T3YLb8SREpYPaEo4iXI-ZGufHcZO6LuN3TlredMPYH6tvUY_IykjvS_b5ZOkaBTSPWBdtspxq2ms5yQCa0lYPxpR8uT9bnJkCQanZ7nYklp4-2Pn38p4UArrrUehe73zWxzEou4hjFOWU8ls8lLjBdWIXFamcw0eisS6LB7MntZlq4K5sAQTYZe6XlDSnOvaQdVaW-c9C370mQOslGRtwCu1_BTopc13UQql98WyMd84RzowPsQX2cSC6z2M">
+<div class="absolute inset-0 bg-surface/30 backdrop-blur-sm"></div>
+</div>
+<main class="relative z-10 w-full max-w-lg px-margin">
+<div class="rpg-dialog p-unit md:p-gutter">
+<div class="corner-accent corner-tl"></div>
+<div class="corner-accent corner-tr"></div>
+<div class="corner-accent corner-bl"></div>
+<div class="corner-accent corner-br"></div>
+<div class="text-center mb-gutter border-b-2 border-black pb-2">
+<h1 class="font-headline-md text-headline-md text-black tracking-[0.2em]">RESULT</h1>
+</div>
+<div class="space-y-4 px-unit">
+<div class="flex justify-between items-center group">
+<span class="font-label-lg text-label-lg text-black uppercase tracking-wider flex items-center">
+<span class="material-symbols-outlined mr-2 text-[18px]">keyboard_double_arrow_right</span>
+                        Kekuatan Begadang
+                    </span>
+<span class="font-headline-sm text-headline-sm text-primary-container bg-black px-2 py-1 select-none">MAX</span>
+</div>
+<div class="flex justify-between items-center group">
+<span class="font-label-lg text-label-lg text-black uppercase tracking-wider flex items-center">
+<span class="material-symbols-outlined mr-2 text-[18px]">bolt</span>
+                        Ketahanan Deadline
+                    </span>
+<span class="font-headline-sm text-headline-sm text-secondary-container bg-black px-2 py-1 select-none">LEGENDARY</span>
+</div>
+<div class="flex justify-between items-center group">
+<span class="font-label-lg text-label-lg text-black uppercase tracking-wider flex items-center">
+<span class="material-symbols-outlined mr-2 text-[18px]">shield</span>
+                        Mental Saat Revisi
+                    </span>
+<span class="font-headline-sm text-headline-sm text-tertiary-container bg-black px-2 py-1 select-none">SURVIVED</span>
+</div>
+<div class="flex justify-between items-center group">
+<span class="font-label-lg text-label-lg text-black uppercase tracking-wider flex items-center">
+<span class="material-symbols-outlined mr-2 text-[18px]">warning</span>
+                        Tingkat Overthinking
+                    </span>
+<div class="flex items-center">
+<span class="font-body-lg text-body-lg text-black font-bold mr-2">Tinggi</span>
+<div class="flex">
+<div class="pixel-bar-segment bg-error"></div>
+<div class="pixel-bar-segment bg-error"></div>
+<div class="pixel-bar-segment bg-error"></div>
+<div class="pixel-bar-segment bg-surface-container-highest"></div>
+</div>
+</div>
+</div>
+<div class="flex justify-between items-center group">
+<span class="font-label-lg text-label-lg text-black uppercase tracking-wider flex items-center">
+<span class="material-symbols-outlined mr-2 text-[18px]">stars</span>
+                        Tingkat Hebat
+                    </span>
+<div class="text-right">
+<span class="font-body-lg text-body-lg text-black font-bold italic">Tidak Terukur</span>
+<span class="cursor-blink ml-1"></span>
+</div>
+</div>
+</div><div class="mt-4 text-center"><p class="font-body-md text-surface-container-lowest">Subjek terlalu kuat untuk sistem akademik biasa.</p></div>
+<div class="mt-margin pt-gutter border-t-2 border-black flex justify-center">
+<button id="next-page-btn" class="group relative w-full md:w-auto border-2 border-surface-container-lowest px-8 py-2 font-headline-sm text-headline-sm transition-all active:translate-y-1 flex items-center justify-center gap-4 bg-surface-container-highest hover:bg-surface-bright text-on-surface">SELANJUTNYA <span class="material-symbols-outlined">play_arrow</span></button>
+</div>
+</div>
+</main>
+<script>
+        // RPG menu active interactions
+        const items = document.querySelectorAll('.group');
+        items.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                const icon = item.querySelector('.material-symbols-outlined');
+                if (icon) icon.classList.add('animate-pulse');
+            });
+            item.addEventListener('mouseleave', () => {
+                const icon = item.querySelector('.material-symbols-outlined');
+                if (icon) icon.classList.remove('animate-pulse');
+            });
+        });
+
+        // Logika pengalihan ke halaman page5.html saat tombol ditekan
+        document.addEventListener('DOMContentLoaded', () => {
+            const nextBtn = document.getElementById('next-page-btn');
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    window.location.href = "page5.html";
+                });
+            }
+        });
+    </script>
+</body></html>
